@@ -62,7 +62,7 @@ def _to_license_spdx(license: CreativeWork | AnyUrl) -> str:
 
 
 @transpiler_plugin(
-    name="oci-annotations",
+    name="cwl2oci",
     description="CWL2OCI Transpiler-Mate Plugin.",
     options_model=CWL2OCIOptions,
 )
