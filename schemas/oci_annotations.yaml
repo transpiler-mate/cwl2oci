@@ -1,0 +1,66 @@
+# Copyright 2025-2026 Terradue
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://oras.land/docs/how_to_guides/manifest_annotations/
+$ref: '#/$defs/OciAnnotations'
+
+$defs:
+
+  OciAnnotations:
+    type: object
+    required:
+    - org.opencontainers.image.title
+    - org.opencontainers.image.description
+    - org.opencontainers.image.version
+    - org.opencontainers.image.licenses
+    - org.cwl.entrypoint
+    - org.cwl.type
+    properties:
+      org.opencontainers.image.title:
+        type: string
+        description: |
+          The `org.opencontainers.image.title` property
+      org.opencontainers.image.description:
+        type: string
+        description: |
+          The `org.opencontainers.image.description` property
+      org.opencontainers.image.version:
+        type: string
+        description: |
+          The `org.opencontainers.image.version` property
+      org.opencontainers.image.source:
+        type: string
+        description: |
+          The `org.opencontainers.image.source` property
+      org.opencontainers.image.revision:
+        type: string
+        description: |
+          The `org.opencontainers.image.revision` property
+      org.opencontainers.image.licenses:
+        type: string
+        description: |
+          The `org.opencontainers.image.licenses` property
+      org.cwl.entrypoint:
+        type: string
+        description: |
+          The `org.cwl.entrypoint` property
+      org.cwl.spec:
+        type: string
+        description: |
+          The `org.cwl.spec` property
+      org.cwl.type:
+        type: string
+        description: |
+          The `org.cwl.type` property
