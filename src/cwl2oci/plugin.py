@@ -104,7 +104,7 @@ def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
     try:
         logger.info(f"Serializing OCI Annotations to {options.output.absolute()}")
         with options.output.open("w") as output_stream:
-            json.dump(annotations, output_stream)
+            json.dump(annotations, output_stream, indent=2)
         logger.success(f"OCI Annotations successfully serialized to {options.output.absolute()}")
     except Exception as e:
         raise PluginFailureError(
