@@ -24,8 +24,8 @@ from loguru import logger
 from pydantic import AnyUrl, BaseModel, ConfigDict, Field
 from transpiler_mate.api import (
     CreativeWork,
-    PluginExecutionError,
     PluginFailureError,
+    SoftwareApplication,
     transpiler_plugin,
 )
 
@@ -68,33 +68,32 @@ def _to_license_spdx(license: CreativeWork | AnyUrl) -> str:
 )
 def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
     """CWL2OCI Transpiler-Mate Plugin."""
-    if not context.resolved_process:
-        raise PluginExecutionError(
-            "Please specify the #<process-id> to create the OCI Annotations"
-        )
+
+    metadata: SoftwareApplication = context.metadata
+    resolved_process = context.resolved_process
 
     oci_annotations: OciAnnotations = OciAnnotations(
         # org.opencontainers.image.* properties
-        org_opencontainers_image_title=context.metadata.name,
+        org_opencontainers_image_title=metadata.name,
         org_opencontainers_image_description=(
-            context.metadata.description.replace("\n", " ").replace("\r", "")
+            metadata.description.replace("\n", " ").replace("\r", "")
         ),
-        org_opencontainers_image_version=(context.metadata.software_version),
+        org_opencontainers_image_version=(metadata.software_version),
         org_opencontainers_image_licenses=(
             " OR ".join(
-                [_to_license_spdx(license) for license in context.metadata.license]
+                [_to_license_spdx(license) for license in metadata.license]
             )
-            if isinstance(context.metadata.license, list)
-            else _to_license_spdx(context.metadata.license)
+            if isinstance(metadata.license, list)
+            else _to_license_spdx(metadata.license)
         ),
         org_opencontainers_image_source=options.image_source,
         org_opencontainers_image_revision=options.image_revision,
         # org.cwl.* properties
-        org_cwl_entrypoint=context.resolved_process.id,
-        org_cwl_spec=str(context.resolved_process.cwlVersion)
-        if context.resolved_process.cwlVersion
+        org_cwl_entrypoint=resolved_process.id,
+        org_cwl_spec=str(resolved_process.cwlVersion)
+        if resolved_process.cwlVersion
         else None,
-        org_cwl_type=context.resolved_process.class_,
+        org_cwl_type=resolved_process.class_,
     )
 
     annotations: dict[str, Any] = {
@@ -103,8 +102,10 @@ def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
 
     try:
         logger.info(f"Serializing OCI Annotations to {options.output.absolute()}")
+
         with options.output.open("w") as output_stream:
             json.dump(annotations, output_stream, indent=2)
+
         logger.success(f"OCI Annotations successfully serialized to {options.output.absolute()}")
     except Exception as e:
         raise PluginFailureError(
