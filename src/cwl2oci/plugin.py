@@ -101,6 +101,7 @@ def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
     }
 
     try:
+        options.output.parent.mkdir(parents=True, exist_ok=True)
         logger.info(f"Serializing OCI Annotations to {options.output.absolute()}")
 
         with options.output.open("w") as output_stream:
