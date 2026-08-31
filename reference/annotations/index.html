@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2oci/reference/annotations/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Annotations and output - CWL 2 OCI</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Annotations and output";
+        var mkdocs_page_input_path = "reference/annotations.md";
+        var mkdocs_page_url = "/cwl2oci/reference/annotations/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> CWL 2 OCI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/first-steps/">First steps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/install/">Install</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/configure-output/">Configure output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/use-with-oras/">Apply with ORAS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api/">Plugin API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Annotations and output</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#generated-annotations">Generated annotations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license-conversion">License conversion</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-behavior">File behavior</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Explanation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/architecture/">Architecture</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">CWL 2 OCI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">Annotations and output</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2oci/edit/main/docs/reference/annotations.md">Edit on cwl2oci</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="annotation-and-output-reference">Annotation and output reference<a class="headerlink" href="#annotation-and-output-reference" title="Permanent link">&para;</a></h1>
+<p>The output is compact JSON with one top-level target, <code>$manifest</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"$manifest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"org.opencontainers.image.title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is the
+<a href="https://oras.land/docs/how_to_guides/manifest_annotations/">ORAS annotation-file format</a>:
+<code>$manifest</code> tells ORAS to apply the enclosed map to the OCI manifest itself. All
+annotation values emitted by this plugin are strings. Keys whose values are
+<code>None</code> are omitted.</p>
+<h2 id="generated-annotations">Generated annotations<a class="headerlink" href="#generated-annotations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Source</th>
+<th>Required in output</th>
+<th>Transformation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>org.opencontainers.image.title</code></td>
+<td><code>context.metadata.name</code></td>
+<td>Yes</td>
+<td>Copied unchanged.</td>
+</tr>
+<tr>
+<td><code>org.opencontainers.image.description</code></td>
+<td><code>context.metadata.description</code></td>
+<td>Yes</td>
+<td>Carriage returns are removed; newlines become spaces.</td>
+</tr>
+<tr>
+<td><code>org.opencontainers.image.version</code></td>
+<td><code>context.metadata.software_version</code></td>
+<td>Yes</td>
+<td>Copied unchanged.</td>
+</tr>
+<tr>
+<td><code>org.opencontainers.image.licenses</code></td>
+<td><code>context.metadata.license</code></td>
+<td>Yes</td>
+<td>Converted as described below.</td>
+</tr>
+<tr>
+<td><code>org.opencontainers.image.source</code></td>
+<td><code>options.image_source</code></td>
+<td>No</td>
+<td>Omitted when unset.</td>
+</tr>
+<tr>
+<td><code>org.opencontainers.image.revision</code></td>
+<td><code>options.image_revision</code></td>
+<td>No</td>
+<td>Omitted when unset.</td>
+</tr>
+<tr>
+<td><code>org.cwl.entrypoint</code></td>
+<td><code>context.resolved_process.id</code></td>
+<td>Yes</td>
+<td>Copied unchanged.</td>
+</tr>
+<tr>
+<td><code>org.cwl.spec</code></td>
+<td><code>context.resolved_process.cwlVersion</code></td>
+<td>No</td>
+<td>Converted to a string; omitted when unset.</td>
+</tr>
+<tr>
+<td><code>org.cwl.type</code></td>
+<td><code>context.resolved_process.class_</code></td>
+<td>Yes</td>
+<td>Copied unchanged.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>org.opencontainers.image.*</code> keys are defined by the
+<a href="https://specs.opencontainers.org/image-spec/annotations/">OCI Image Specification</a>.
+The <code>org.cwl.*</code> keys are cwl2oci extensions using a separate reverse-domain
+namespace.</p>
+<h2 id="license-conversion">License conversion<a class="headerlink" href="#license-conversion" title="Permanent link">&para;</a></h2>
+<p>For a Schema.org <code>CreativeWork</code>, the plugin converts <code>identifier</code> to a string. For
+a URL, it uses the final slash-separated component. For example,
+<code>https://spdx.org/licenses/Apache-2.0</code> becomes <code>Apache-2.0</code>.</p>
+<p>When metadata contains a list of licenses, the converted values are joined with
+<code>OR</code>. The result is used as the OCI SPDX license expression; the plugin does
+not independently validate the expression.</p>
+<h2 id="file-behavior">File behavior<a class="headerlink" href="#file-behavior" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The default path is <code>annotations.json</code> relative to the process working
+  directory.</li>
+<li>The file is opened in text write mode, so an existing destination is replaced.</li>
+<li>Parent directories are not created.</li>
+<li>JSON is emitted without indentation or a trailing newline.</li>
+<li>A successful execution returns <code>None</code>; the file is the result.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../api/" class="btn btn-neutral float-left" title="Plugin API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../explanation/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2oci" class="fa fa-code-fork" style="color: #fcfcfc"> cwl2oci</a>
+        </span>
+    
+    
+      <span><a href="../api/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../explanation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

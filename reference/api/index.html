@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2oci/reference/api/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Plugin API - CWL 2 OCI</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Plugin API";
+        var mkdocs_page_input_path = "reference/api.md";
+        var mkdocs_page_url = "/cwl2oci/reference/api/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> CWL 2 OCI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorials/first-steps/">First steps</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/install/">Install</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/configure-output/">Configure output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/use-with-oras/">Apply with ORAS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Plugin API</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#registration">Registration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#input-requirements">Input requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#errors">Errors</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../annotations/">Annotations and output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Explanation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/architecture/">Architecture</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">CWL 2 OCI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">Plugin API</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2oci/edit/main/docs/reference/api.md">Edit on cwl2oci</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="plugin-api">Plugin API<a class="headerlink" href="#plugin-api" title="Permanent link">&para;</a></h1>
+<p>The package exports version information from <code>cwl2oci</code>; the plugin registration
+and its options model live in <code>cwl2oci.plugin</code>.</p>
+<h2 id="registration">Registration<a class="headerlink" href="#registration" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cwl2oci.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">cwl2oci</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entry-point group</td>
+<td><code>transpiler_mate.plugins</code></td>
+</tr>
+<tr>
+<td>Entry-point name</td>
+<td><code>cwl2oci</code></td>
+</tr>
+<tr>
+<td>Entry-point object</td>
+<td><code>cwl2oci.plugin:cwl2oci</code></td>
+</tr>
+<tr>
+<td>Registration name</td>
+<td><code>cwl2oci</code></td>
+</tr>
+<tr>
+<td>Options model</td>
+<td><code>CWL2OCIOptions</code></td>
+</tr>
+<tr>
+<td>Execution return value</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>cwl2oci</code> is a <code>transpiler_mate.api.PluginRegistration</code>, not a function. Invoke
+the transformation with <code>cwl2oci.execute(context, options)</code>.</p>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cwl2oci.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">CWL2OCIOptions</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>output</code></td>
+<td><code>pathlib.Path</code></td>
+<td><code>annotations.json</code></td>
+<td>File written by the plugin.</td>
+</tr>
+<tr>
+<td><code>image_source</code></td>
+<td><code>str \| None</code></td>
+<td><code>None</code></td>
+<td>Source-code URL placed in <code>org.opencontainers.image.source</code>.</td>
+</tr>
+<tr>
+<td><code>image_revision</code></td>
+<td><code>str \| None</code></td>
+<td><code>None</code></td>
+<td>Source-control revision placed in <code>org.opencontainers.image.revision</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Unknown option fields are forbidden. Pydantic performs construction and
+validation before plugin execution when the host follows the API contract.</p>
+<h2 id="input-requirements">Input requirements<a class="headerlink" href="#input-requirements" title="Permanent link">&para;</a></h2>
+<p>The <code>TranspilerContext</code> must contain a selected process in <code>resolved_process</code>.
+When it is <code>None</code>, execution raises <code>PluginExecutionError</code> with a request to add a
+<code>#&lt;process-id&gt;</code> fragment to the source location.</p>
+<p>The implementation reads these metadata fields:</p>
+<ul>
+<li><code>name</code></li>
+<li><code>description</code></li>
+<li><code>software_version</code></li>
+<li><code>license</code></li>
+</ul>
+<p>It also reads <code>id</code>, <code>cwlVersion</code>, and <code>class_</code> from the selected CWL process.</p>
+<h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Exception</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No selected process</td>
+<td><code>PluginExecutionError</code></td>
+</tr>
+<tr>
+<td>Opening, serializing, or writing the output fails</td>
+<td><code>PluginFailureError</code>, with the original exception chained as <code>__cause__</code></td>
+</tr>
+<tr>
+<td>Invalid options</td>
+<td>Pydantic <code>ValidationError</code> during option construction</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../annotations/" class="btn btn-neutral float-right" title="Annotations and output">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2oci" class="fa fa-code-fork" style="color: #fcfcfc"> cwl2oci</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../annotations/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
