@@ -1,4 +1,4 @@
-# Copyright 2026 Transpiler-Mate
+# Copyright 2026 Terradue
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,9 +45,7 @@ class CWL2OCIOptions(BaseModel):
     ] = None
     image_revision: Annotated[
         str | None,
-        Field(
-            description="Source control revision identifier for the packaged software"
-        ),
+        Field(description="Source control revision identifier for the packaged software"),
     ] = None
     output: Annotated[
         Path,
@@ -80,9 +78,7 @@ def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
         ),
         org_opencontainers_image_version=(metadata.software_version),
         org_opencontainers_image_licenses=(
-            " OR ".join(
-                [_to_license_spdx(license) for license in metadata.license]
-            )
+            " OR ".join([_to_license_spdx(license) for license in metadata.license])
             if isinstance(metadata.license, list)
             else _to_license_spdx(metadata.license)
         ),
@@ -90,9 +86,7 @@ def cwl2oci(context: TranspilerContext, options: CWL2OCIOptions) -> None:
         org_opencontainers_image_revision=options.image_revision,
         # org.cwl.* properties
         org_cwl_entrypoint=resolved_process.id,
-        org_cwl_spec=str(resolved_process.cwlVersion)
-        if resolved_process.cwlVersion
-        else None,
+        org_cwl_spec=str(resolved_process.cwlVersion) if resolved_process.cwlVersion else None,
         org_cwl_type=resolved_process.class_,
     )
 

@@ -1,5 +1,5 @@
 <!--
-Copyright 2026 Transpiler-Mate
+Copyright 2026 Terradue
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,6 +15,11 @@ limitations under the License.
 -->
 
 # CWL 2 OCI
+
+[![PyPI - Version](https://img.shields.io/pypi/v/cwl2oci.svg)](https://pypi.org/project/cwl2oci)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/cwl2oci.svg)](https://pypi.org/project/cwl2oci)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/transpiler-mate/cwl2oci/package.yaml?branch=develop&event=push&label=build&logo=githubactions)](https://github.com/transpiler-mate/cwl2oci/actions/workflows/package.yaml?query=branch%3Adevelop)
+[![Code coverage](https://img.shields.io/codecov/c/github/transpiler-mate/cwl2oci/develop?logo=codecov)](https://app.codecov.io/gh/transpiler-mate/cwl2oci/tree/develop)
 
 `cwl2oci` is a Transpiler-Mate plugin that generates OCI image annotations from
 normalized software metadata and a selected CWL process.
@@ -67,4 +72,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Submit issues at
 
 ## License
 
-Licensed under the [Apache License 2.0](LICENSE).
+[![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)

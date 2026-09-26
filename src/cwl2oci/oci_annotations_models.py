@@ -14,9 +14,7 @@ class OciAnnotations(BaseModel):
         extra="allow",
         populate_by_name=True,
     )
-    org_opencontainers_image_title: Annotated[
-        str, Field(alias="org.opencontainers.image.title")
-    ]
+    org_opencontainers_image_title: Annotated[str, Field(alias="org.opencontainers.image.title")]
     """
     The `org.opencontainers.image.title` property
 

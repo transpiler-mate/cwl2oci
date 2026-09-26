@@ -1,5 +1,5 @@
 <!--
-Copyright 2026 Transpiler-Mate
+Copyright 2026 Terradue
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,12 +19,8 @@ limitations under the License.
 ## Development setup
 
 ```bash
-hatch env create
-hatch run dev:typecheck
-hatch run dev:check
-hatch run dev:lint
-hatch run dev:security
-hatch run test:test
+hatch shell
+task
 ```
 
 ## Quality gate
@@ -32,11 +28,7 @@ hatch run test:test
 Before opening a pull request, run:
 
 ```bash
-hatch run dev:typecheck
-hatch run dev:check
-hatch run dev:lint
-hatch run dev:security
-hatch run test:test
+task
 ```
 
 ## Documentation
