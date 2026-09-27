@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://Transpiler-Mate.github.io/cwl2oci/tutorials/first-steps/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>First steps - CWL 2 OCI</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "First steps";
+        var mkdocs_page_input_path = "tutorials/first-steps.md";
+        var mkdocs_page_url = "/cwl2oci/tutorials/first-steps/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> CWL 2 OCI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">First steps</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-the-example">Create the example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run-the-example">Run the example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-you-learned">What you learned</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">How-to guides</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/install/">Install</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/configure-output/">Configure output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../how-to/use-with-oras/">Apply with ORAS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/api/">Plugin API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/annotations/">Annotations and output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Explanation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../explanation/architecture/">Architecture</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">CWL 2 OCI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tutorials</li>
+      <li class="breadcrumb-item active">First steps</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Transpiler-Mate/cwl2oci/edit/main/docs/tutorials/first-steps.md">Edit on cwl2oci</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="generate-your-first-annotation-file">Generate your first annotation file<a class="headerlink" href="#generate-your-first-annotation-file" title="Permanent link">&para;</a></h1>
+<p>This tutorial runs the <code>cwl2oci</code> plugin directly in Python. You will construct the
+small context normally supplied by a Transpiler-Mate runtime and generate an
+<code>annotations.json</code> file.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>You need Python 3.10 or newer and an installed copy of <code>cwl2oci</code>. See
+<a href="../../how-to/install/">Install cwl2oci</a> if you have not installed it yet.</p>
+<h2 id="create-the-example">Create the example<a class="headerlink" href="#create-the-example" title="Permanent link">&para;</a></h2>
+<p>Create <code>first_annotations.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cwl_utils.parser.cwl_v1_2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnyUrl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transpiler_mate.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">SoftwareApplication</span><span class="p">,</span> <span class="n">TranspilerContext</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cwl2oci.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">CWL2OCIOptions</span><span class="p">,</span> <span class="n">cwl2oci</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UnusedResolver</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TranspilerContext</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">"main"</span><span class="p">,</span>
+    <span class="n">cwlVersion</span><span class="o">=</span><span class="s2">"v1.2"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[],</span>
+<span class="p">)</span>
+
+<span class="c1"># A runtime normally validates and supplies this metadata. model_construct keeps</span>
+<span class="c1"># this standalone example focused on the fields read by cwl2oci.</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">SoftwareApplication</span><span class="o">.</span><span class="n">model_construct</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Hello workflow"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">"A minimal CWL workflow"</span><span class="p">,</span>
+    <span class="n">software_version</span><span class="o">=</span><span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="n">AnyUrl</span><span class="p">(</span><span class="s2">"https://spdx.org/licenses/Apache-2.0"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">TranspilerContext</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">AnyUrl</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">"workflow.cwl"</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">()),</span>
+    <span class="n">document</span><span class="o">=</span><span class="n">process</span><span class="p">,</span>
+    <span class="n">resolved_process</span><span class="o">=</span><span class="n">process</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+    <span class="n">resolver</span><span class="o">=</span><span class="n">UnusedResolver</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">CWL2OCIOptions</span><span class="p">(</span>
+    <span class="n">image_source</span><span class="o">=</span><span class="s2">"https://github.com/example/hello-workflow"</span><span class="p">,</span>
+    <span class="n">image_revision</span><span class="o">=</span><span class="s2">"abc123"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cwl2oci</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p>The decorated <code>cwl2oci</code> value is a plugin registration. Its <code>execute</code> method
+accepts a <code>TranspilerContext</code> and validated <code>CWL2OCIOptions</code>.</p>
+<h2 id="run-the-example">Run the example<a class="headerlink" href="#run-the-example" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="go">python first_annotations.py</span>
+</code></pre></div>
+<p>The command creates <code>annotations.json</code> in the current directory:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"$manifest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"org.opencontainers.image.title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello workflow"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.opencontainers.image.description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A minimal CWL workflow"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.opencontainers.image.version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.opencontainers.image.source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/example/hello-workflow"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.opencontainers.image.revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.opencontainers.image.licenses"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apache-2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.cwl.entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.cwl.spec"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"org.cwl.type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Workflow"</span><span class="p">}}</span>
+</code></pre></div>
+<p><code>$manifest</code> identifies the target for tools that consume the generated file. Its
+value is the string-to-string annotation map for the OCI manifest.</p>
+<h2 id="what-you-learned">What you learned<a class="headerlink" href="#what-you-learned" title="Permanent link">&para;</a></h2>
+<p>You generated annotations from normalized software metadata and a selected CWL
+process. In normal use, a Transpiler-Mate runtime constructs the context and
+discovers the plugin; the runtime's documentation defines its command-line or
+service interface.</p>
+<p>Next, see the <a href="../../reference/annotations/">annotation reference</a> for the complete
+field mapping or <a href="../../how-to/configure-output/">choose a destination</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../how-to/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Transpiler-Mate/cwl2oci" class="fa fa-code-fork" style="color: #fcfcfc"> cwl2oci</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../how-to/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
